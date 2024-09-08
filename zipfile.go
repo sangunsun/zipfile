@@ -3,7 +3,7 @@ Copyright 2024 sangunsun All Rights Reserved
 本程序实现磁盘压缩、文件夹数据压缩、数据去重功能
 实现方式是把给定目标中重复的文件进行数据去重，
 重复文件只保留一份文件数据,但不会删除任何一个文件，所有文件共享一份数据
-本软件使用sqlite3保存文件信息，但本软件可独立运行，不需要安装sqlite数据库
+本软件可独立运行，不需要安装sqlite数据库
 */
 package main
 
@@ -17,11 +17,14 @@ import (
     "log"
     "time"
     "syscall"
+
+    //"time"
     "io"
     "io/fs"
     "os"
     "path/filepath"
     "strings"
+
     _ "modernc.org/sqlite"
 )
 
@@ -34,15 +37,15 @@ var minSize int64
 //var isNewScan string //为了保证磁盘上的文件信息和数据库中文件信息一致性，不造成误删除，取消该参数
 var isOnlyScan string
 var delMode string
-var repeatFile string
+//var repeatFile string
 
 var pbeginPath = flag.String("path","./","需要扫描处理的目录路径")
-var pdelay = flag.Int("d",0,"文件的最后修改时间离处理时的最短时间间隔")
+var pdelay = flag.Int("delay",0,"文件的最后修改时间离处理时的最短时间间隔,单位:秒")
 var pminSize = flag.Int64("minsize",1000,"最小文件大小，单位字节")
 //var pisNewScan= flag.String("newscan","yes","yes/no,是否进行新的扫描")
 var pisOnlyScan = flag.String("onlyscan","yes","yes/no,是否只扫描不执行数据删除操作")
 var pdelMode = flag.String("delmode","data","data/file,删除模式，删除文件或只删除数据")
-var prepeatFile = flag.String("rfile","repeatFile.txt","有冗余数据的重复文件列表")
+//var prepeatFile = flag.String("rfile","repeatFile.txt","有冗余数据的重复文件列表")
 
 func init(){
 
@@ -53,7 +56,7 @@ func init(){
     //   isNewScan = *pisNewScan
     isOnlyScan = *pisOnlyScan
     delMode = *pdelMode
-    repeatFile = *prepeatFile
+    //repeatFile = *prepeatFile
 
     var err error
     //db, err = sql.Open("sqlite", ":memory:")
