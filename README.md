@@ -3,6 +3,8 @@ Eliminate redundant files to save disk space，一个用于删除重复文件的
 
 本软件对指定的范围进行查找，如果发现两个文件内容完全相同且有多份数据，则删除多余的数据，只保留一份数据，其它地方文件以硬链接方式指向文件唯一的数据区
 
+#### 不支持windows，支持linux和mac os
+
 #### 程序的输入参数
 1. -path:扫描哪个目录，默认：./
 2. -onlyscan:是否只扫描不执行数据删除，取值范围："yes/no,默认："yes")
