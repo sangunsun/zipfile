@@ -5,6 +5,20 @@ Eliminate redundant files to save disk space，一个用于删除重复文件的
 
 ### 版本v0.2
 #### 支持windows、linux和macos等操作系统
+
+#### 使用示例
++ 对当前目录进行扫描查看有多少重复文件，不删除数据  
+` zipfile -path ./`
+
++ 只查看一下`/home`目录中有多少重复的文件，不删除冗余文件或数据  
+`zipfile -path /home`
+
++ 把`/home`目录中重复文件的冗余数据删除，但不影响原文件目录结构(看起来文件一个都没少)  
+`zipfile -path /home -onlyscan no`
+
++ 把`/home`目录中的重复文件删除，每组重复文件只保留一个时间最早的文件    
+`zipfile -path /home -onlyscan no -delmode file`
+
 #### 程序的输入参数
 ```
  -path string
@@ -66,16 +80,3 @@ Eliminate redundant files to save disk space，一个用于删除重复文件的
 
 + 如果是扫描并删除冗余数据  
 `数据重复文件个数为: 0 ,共: 0 组重复文件，节省了: 0 M磁盘空间`
-
-#### 使用示例
-+ 对当前目录进行扫描查看有多少重复文件，不删除数据  
-` zipfile -path ./`
-
-+ 只查看一下`/home`目录中有多少重复的文件，不删除冗余文件或数据  
-`zipfile -path /home`
-
-+ 把`/home`目录中重复文件的冗余数据删除，但不影响原文件目录结构(看起来文件一个都没少)  
-`zipfile -path /home -onlyscan no`
-
-+ 把`/home`目录中的重复文件删除，每组重复文件只保留一个时间最早的文件    
-`zipfile -path /home -onlyscan no -delmode file`
